@@ -43,6 +43,9 @@ app.configure(function(){
      next();
   });
 
+  app.use(sessionController.tiempolimite);
+
+
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });

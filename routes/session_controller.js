@@ -75,7 +75,7 @@ exports.create = function(req, res) {
         // IMPORTANTE: creo req.session.user.
         // Solo guardo algunos campos del usuario en la sesion.
         // Esto es lo que uso para saber si he hecho login o no.
-        req.session.user = {id:user.id, login:user.login, name:user.name};
+        req.session.user = {id:user.id, login:user.login, name:user.name, hora: Date.now()};
 
         // Vuelvo al url indicado en redir
         res.redirect(redir);
@@ -93,5 +93,24 @@ exports.destroy = function(req, res) {
     req.flash('success', 'Logout.');
     res.redirect("/login");     
 };
+
+//Calcula el tiempo desde que el usuario hizo lgo.
+exports.tiempolimite = function(req, res, next){
+    // Si ha hecho log in
+    if(req.session.user){
+        //Si han pasado 60 segundos desde la última llamada hace logout
+        if((req.session.user.hora + 60000)< Date.now()){
+            delete req.session.user;
+        }
+        else{
+            // Si no ha pasado el tiempo, actualiza la fecha
+            req.session.user.hora = Date.now();
+        }
+    }
+    next();
+
+};
+
+
 
 
