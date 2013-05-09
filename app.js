@@ -99,6 +99,7 @@ app.get('/posts/new',
         postController.new);
 
 app.get('/posts/:postid([0-9]+).:format?', postController.show);
+
 app.post('/posts', 
 	sessionController.requiresLogin,
         postController.create);
@@ -135,6 +136,13 @@ app.put('/users/:userid([0-9]+)',
 app.delete('/users/:userid([0-9]+)', 
 	sessionController.requiresLogin,
            userController.destroy);
+
+app.post('/posts', sessionController.requiresLogin, postController.create);
+app.get('/posts/:postid([0-9]+)/edit', sessionController.requiresLogin,postController.edit);
+app.put('/posts/:postid([0-9]+)', sessionController.requiresLogin, postController.update);
+app.delete('/posts/:postid([0-9]+)',sessionController.requiresLogin, postController.destroy);
+app.get('/posts/search', sessionController.requiresLogin, postController.search);
+
 
 //---------------------
 

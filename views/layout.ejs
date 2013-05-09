@@ -22,8 +22,13 @@
       </div>
 
       <a href="/">Home</a>
-      <a href="/posts">Posts</a>
+
+      
       <a href="/users">Usuarios</a>
+
+      <a href="/Posts">Posts</a>
+      <a href="/posts/search">Search posts</a>
+
     </nav>
   </header>
 
@@ -69,8 +74,14 @@
    <hr />
   </section>
 
+
   <footer>
     <p> Universidad Politécnica de Madrid. Curso 2012-2013. </p>
+    <% var date = new Date() %>
+      <% var fecha = date.toString() %>
+      <% fecha = fecha.substring(0,15) %>
+      <%= fecha %>
   </footer>
+
 </body>
 </html>
