@@ -163,6 +163,7 @@ exports.update = function(req, res, next) {
     
     req.user.save(fields_to_update)
         .success(function() {
+            req.session.user.name =req.body.user.name; 
             req.flash('success', 'Usuario actualizado con éxito.');
             res.redirect('/users');
         })
